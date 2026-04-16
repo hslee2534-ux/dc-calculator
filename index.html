@@ -416,6 +416,63 @@ input[type="text"].error { border-color: var(--danger); }
 .step-table tr:nth-child(even) td { background: var(--bg); }
 .step-table td:last-child { text-align: right; font-weight: 600; }
 
+/* ── 구간표 토글 버튼 ── */
+.bracket-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-light);
+  border: 1px solid #bfdbfe;
+  border-radius: 20px;
+  padding: 2px 9px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.15s;
+  vertical-align: middle;
+  margin-left: 6px;
+  user-select: none;
+}
+.bracket-toggle:hover { background: var(--accent); color: white; border-color: var(--accent); }
+.bracket-toggle.open  { background: var(--accent); color: white; border-color: var(--accent); }
+
+/* ── 구간표 패널 ── */
+.bracket-panel {
+  display: none;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 6px 0 4px;
+}
+.bracket-panel.open { display: block; }
+.bracket-panel table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.bracket-panel thead th {
+  background: var(--primary);
+  color: white;
+  padding: 7px 10px;
+  text-align: left;
+  font-weight: 600;
+}
+.bracket-panel tbody td {
+  padding: 7px 10px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.bracket-panel tbody tr:last-child td { border-bottom: none; }
+.bracket-panel tbody tr:nth-child(even) td { background: white; }
+.bracket-panel tbody tr.active-row td {
+  background: #dbeafe !important;
+  font-weight: 700;
+  color: var(--accent);
+}
+.bracket-panel tbody tr.active-row td:first-child::before {
+  content: '▶ ';
+  color: var(--accent);
+}
+
 /* ── 차트 영역 ── */
 .chart-wrap {
   display: flex;
@@ -761,26 +818,94 @@ footer strong { color: rgba(255,255,255,0.7); }
               <td>DC 적립금</td>
               <td id="d-pension">—</td>
             </tr>
+
+            <!-- 근속연수공제 -->
             <tr class="minus">
-              <td>① 근속연수공제</td>
+              <td>
+                ① 근속연수공제
+                <span class="bracket-toggle" onclick="toggleBracket('service')">구간표 ▾</span>
+              </td>
               <td id="d-service-deduct">—</td>
             </tr>
+            <tr id="bracket-row-service" style="display:none;">
+              <td colspan="2" style="padding: 0 0 8px;">
+                <div class="bracket-panel open" id="bracket-service">
+                  <table>
+                    <thead><tr><th>근속연수</th><th>공제 산식</th><th>최대 공제액</th></tr></thead>
+                    <tbody>
+                      <tr id="sb-0"><td>1 ~ 5년</td><td>30만원 × 근속연수</td><td>150만원</td></tr>
+                      <tr id="sb-1"><td>6 ~ 10년</td><td>150만원 + 50만원 × (연수−5)</td><td>400만원</td></tr>
+                      <tr id="sb-2"><td>11 ~ 20년</td><td>400만원 + 80만원 × (연수−10)</td><td>1,200만원</td></tr>
+                      <tr id="sb-3"><td>21년 이상</td><td>1,200만원 + 120만원 × (연수−20)</td><td>—</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+
             <tr class="subtotal">
               <td>환산급여 <small style="font-size:11px; font-weight:400;">(×12 ÷ 근속연수)</small></td>
               <td id="d-converted-salary">—</td>
             </tr>
+
+            <!-- 환산급여공제 -->
             <tr class="minus">
-              <td>② 환산급여공제</td>
+              <td>
+                ② 환산급여공제
+                <span class="bracket-toggle" onclick="toggleBracket('salary')">구간표 ▾</span>
+              </td>
               <td id="d-salary-deduct">—</td>
             </tr>
+            <tr id="bracket-row-salary" style="display:none;">
+              <td colspan="2" style="padding: 0 0 8px;">
+                <div class="bracket-panel open" id="bracket-salary">
+                  <table>
+                    <thead><tr><th>환산급여 구간</th><th>공제 산식</th></tr></thead>
+                    <tbody>
+                      <tr id="salb-0"><td>800만원 이하</td><td>전액 공제</td></tr>
+                      <tr id="salb-1"><td>800만원 ~ 7,000만원</td><td>800만원 + 초과분 × 60%</td></tr>
+                      <tr id="salb-2"><td>7,000만원 ~ 1억원</td><td>4,520만원 + 초과분 × 55%</td></tr>
+                      <tr id="salb-3"><td>1억원 ~ 3억원</td><td>6,170만원 + 초과분 × 45%</td></tr>
+                      <tr id="salb-4"><td>3억원 초과</td><td>15,170만원 + 초과분 × 35%</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+
             <tr class="subtotal">
               <td>과세표준</td>
               <td id="d-tax-base">—</td>
             </tr>
+
+            <!-- 소득세율 -->
             <tr>
-              <td>적용 세율</td>
+              <td>
+                적용 세율
+                <span class="bracket-toggle" onclick="toggleBracket('taxrate')">세율표 ▾</span>
+              </td>
               <td id="d-tax-rate">—</td>
             </tr>
+            <tr id="bracket-row-taxrate" style="display:none;">
+              <td colspan="2" style="padding: 0 0 8px;">
+                <div class="bracket-panel open" id="bracket-taxrate">
+                  <table>
+                    <thead><tr><th>과세표준 (환산급여 기준)</th><th>세율</th><th>누진공제</th></tr></thead>
+                    <tbody>
+                      <tr id="tb-0"><td>1,400만원 이하</td><td>6%</td><td>—</td></tr>
+                      <tr id="tb-1"><td>1,400만원 ~ 5,000만원</td><td>15%</td><td>126만원</td></tr>
+                      <tr id="tb-2"><td>5,000만원 ~ 8,800만원</td><td>24%</td><td>576만원</td></tr>
+                      <tr id="tb-3"><td>8,800만원 ~ 1.5억원</td><td>35%</td><td>1,544만원</td></tr>
+                      <tr id="tb-4"><td>1.5억원 ~ 3억원</td><td>38%</td><td>1,994만원</td></tr>
+                      <tr id="tb-5"><td>3억원 ~ 5억원</td><td>40%</td><td>2,594만원</td></tr>
+                      <tr id="tb-6"><td>5억원 ~ 10억원</td><td>42%</td><td>3,594만원</td></tr>
+                      <tr id="tb-7"><td>10억원 초과</td><td>45%</td><td>6,594만원</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+              </td>
+            </tr>
+
             <tr class="minus">
               <td>퇴직소득세 <small style="font-size:11px; font-weight:400;">(÷12 × 근속연수)</small></td>
               <td id="d-income-tax">—</td>
@@ -1157,6 +1282,9 @@ function calculate() {
   document.getElementById('d-local-tax').textContent        = `- ${fmtWonFull(localTax)}`;
   document.getElementById('d-net').textContent              = fmtWonFull(netAmount);
 
+  // 구간 강조
+  highlightBrackets(years, convertedSalary, taxBase);
+
   // 단계별 계산 과정
   document.getElementById('step-tbody').innerHTML = `
     <tr><td>DC 적립금</td><td>입력값</td><td>${fmtWonFull(pension)}</td></tr>
@@ -1227,6 +1355,35 @@ function getServiceDeductFormula(years) {
 // ═══════════════════════════════════════════
 //  기타 기능
 // ═══════════════════════════════════════════
+// ── 구간표 토글 ──
+function toggleBracket(type) {
+  const row = document.getElementById('bracket-row-' + type);
+  const btn = row.previousElementSibling.querySelector('.bracket-toggle');
+  const isOpen = row.style.display !== 'none';
+  row.style.display = isOpen ? 'none' : 'table-row';
+  btn.textContent = isOpen ? '구간표 ▾' : '구간표 ▴';
+  if (type === 'taxrate') btn.textContent = isOpen ? '세율표 ▾' : '세율표 ▴';
+  btn.classList.toggle('open', !isOpen);
+}
+
+// 계산 후 현재 적용 구간 강조
+function highlightBrackets(years, convertedSalary, taxBase) {
+  // 근속연수공제 강조
+  ['sb-0','sb-1','sb-2','sb-3'].forEach(id => document.getElementById(id).classList.remove('active-row'));
+  const si = years <= 5 ? 0 : years <= 10 ? 1 : years <= 20 ? 2 : 3;
+  document.getElementById('sb-' + si).classList.add('active-row');
+
+  // 환산급여공제 강조
+  ['salb-0','salb-1','salb-2','salb-3','salb-4'].forEach(id => document.getElementById(id).classList.remove('active-row'));
+  const sali = convertedSalary <= 8000000 ? 0 : convertedSalary <= 70000000 ? 1 : convertedSalary <= 100000000 ? 2 : convertedSalary <= 300000000 ? 3 : 4;
+  document.getElementById('salb-' + sali).classList.add('active-row');
+
+  // 소득세율 강조
+  ['tb-0','tb-1','tb-2','tb-3','tb-4','tb-5','tb-6','tb-7'].forEach(id => document.getElementById(id).classList.remove('active-row'));
+  const ti = taxBase <= 14000000 ? 0 : taxBase <= 50000000 ? 1 : taxBase <= 88000000 ? 2 : taxBase <= 150000000 ? 3 : taxBase <= 300000000 ? 4 : taxBase <= 500000000 ? 5 : taxBase <= 1000000000 ? 6 : 7;
+  document.getElementById('tb-' + ti).classList.add('active-row');
+}
+
 function toggleAccordion() {
   const content = document.getElementById('accordion-content');
   const arrow   = document.getElementById('accordion-arrow');
