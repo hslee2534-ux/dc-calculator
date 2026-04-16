@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dc-calc.kr/sitemap.xml
+Sitemap: https://dc-calc.com/sitemap.xml
