@@ -1198,10 +1198,11 @@ function copyResult() {
     .catch(() => showToast('복사에 실패했습니다'));
 }
 
-// 오늘 날짜 기본값 설정
+// 오늘 날짜 기본값 설정 + 근속연수 자동 반영
 (function() {
   const today = new Date().toISOString().split('T')[0];
   document.getElementById('endDate').value = today;
+  calcYears();
 })();
 </script>
 </body>
