@@ -1,0 +1,11 @@
+# 보고서/계획서 (배포 제외)
+계획서.md
+보고서_*.html
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
