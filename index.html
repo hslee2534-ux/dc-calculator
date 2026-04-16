@@ -319,6 +319,43 @@ input[type="text"].error { border-color: var(--danger); }
   opacity: 0.7;
   margin-top: 8px;
 }
+
+/* 실수령액 + 실효세율 나란히 */
+.result-main-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
+  margin: 0;
+}
+.result-divider {
+  width: 1px;
+  height: 64px;
+  background: rgba(255,255,255,0.2);
+  margin: 0 28px;
+  flex-shrink: 0;
+}
+.result-net-col, .result-rate-col { text-align: center; }
+
+.effective-rate-badge {
+  display: inline-block;
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+.effective-rate-badge.low    { color: #4ade80; }   /* ~5%   초록 */
+.effective-rate-badge.mid    { color: #fbbf24; }   /* 5~15% 노랑 */
+.effective-rate-badge.high   { color: #fb923c; }   /* 15~25% 주황 */
+.effective-rate-badge.vhigh  { color: #f87171; }   /* 25%+  빨강 */
+
+.rate-context {
+  font-size: 11px;
+  opacity: 0.65;
+  margin-top: 5px;
+  line-height: 1.5;
+}
 .result-hero .tax-summary {
   display: flex;
   gap: 16px;
@@ -526,6 +563,9 @@ footer strong { color: rgba(255,255,255,0.7); }
 @media (max-width: 420px) {
   .calc-nav { grid-template-columns: 1fr; }
   .result-hero .tax-summary { flex-direction: column; align-items: center; }
+  .result-divider { width: 80px; height: 1px; margin: 14px 0; }
+  .result-main-row { flex-direction: column; gap: 8px; }
+  .effective-rate-badge { font-size: 32px; }
 }
 </style>
 </head>
@@ -635,11 +675,24 @@ footer strong { color: rgba(255,255,255,0.7); }
     <!-- 결과 카드 -->
     <div id="result-section">
 
-      <!-- 실수령액 강조 -->
+      <!-- 실수령액 + 실효세율 강조 -->
       <div class="result-hero" id="result-hero">
-        <div class="label">예상 실수령액 (세후)</div>
-        <div class="amount" id="result-amount">0 원</div>
-        <div class="sub" id="result-sub"></div>
+        <div class="result-main-row">
+          <!-- 실수령액 -->
+          <div class="result-net-col">
+            <div class="label">예상 실수령액 (세후)</div>
+            <div class="amount" id="result-amount">0 원</div>
+          </div>
+          <!-- 구분선 -->
+          <div class="result-divider"></div>
+          <!-- 실효세율 -->
+          <div class="result-rate-col">
+            <div class="label">실효세율</div>
+            <div class="effective-rate-badge" id="effective-rate-badge">0%</div>
+            <div class="rate-context" id="rate-context"></div>
+          </div>
+        </div>
+        <div class="sub" id="result-sub" style="margin-top: 14px;"></div>
         <div class="tax-summary">
           <div class="tax-item">
             <div class="t-label">DC 적립금</div>
@@ -1074,7 +1127,19 @@ function calculate() {
 
   document.getElementById('result-amount').textContent = fmtWonFull(netAmount);
   document.getElementById('result-sub').textContent =
-    `근속 ${years}년 · 세금 ${fmtWon(totalTax)} (${taxPct}%) 공제 후`;
+    `근속 ${years}년 · 세금 ${fmtWon(totalTax)} 공제 후`;
+
+  // 실효세율 표시
+  const rateEl  = document.getElementById('effective-rate-badge');
+  const rateCtx = document.getElementById('rate-context');
+  rateEl.textContent = taxPct + '%';
+  rateEl.className = 'effective-rate-badge ' +
+    (taxPct < 5 ? 'low' : taxPct < 15 ? 'mid' : taxPct < 25 ? 'high' : 'vhigh');
+  rateCtx.textContent =
+    taxPct < 5  ? '낮은 세부담\n근속연수 공제 효과 큼' :
+    taxPct < 15 ? '평균 수준 세부담' :
+    taxPct < 25 ? '높은 세부담\n연금 수령 검토 권장' :
+                  '매우 높은 세부담\nIRP 이전 절세 필수';
 
   document.getElementById('r-pension').textContent     = fmtWon(pension);
   document.getElementById('r-income-tax').textContent  = fmtWon(incomeTax);
