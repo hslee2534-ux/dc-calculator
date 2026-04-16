@@ -574,6 +574,79 @@ input[type="text"].error { border-color: var(--danger); }
 .info-card p, .info-card li { font-size: 13px; color: var(--muted); line-height: 1.7; }
 .info-card ul { padding-left: 16px; }
 
+/* ── 입력 모드 탭 ── */
+.input-mode-tabs {
+  display: flex;
+  gap: 6px;
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 4px;
+  margin-bottom: 16px;
+}
+.input-mode-tab {
+  flex: 1;
+  padding: 8px 10px;
+  border-radius: 7px;
+  border: none;
+  background: transparent;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.18s;
+  line-height: 1.3;
+  text-align: center;
+}
+.input-mode-tab.active {
+  background: white;
+  color: var(--accent);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* ── 년/월 드롭다운 그리드 ── */
+.date-dropdowns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.date-drop-group { display: flex; flex-direction: column; gap: 6px; }
+.date-drop-row { display: flex; gap: 6px; }
+.date-drop-row select { flex: 1; min-width: 0; }
+
+/* ── 근속연수 직접 입력 ── */
+.tenure-direct {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.tenure-direct input[type="number"] {
+  width: 76px;
+  padding: 10px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: inherit;
+  color: var(--text);
+  text-align: center;
+  -moz-appearance: textfield;
+}
+.tenure-direct input[type="number"]::-webkit-outer-spin-button,
+.tenure-direct input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+.tenure-direct input[type="number"]:focus {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+}
+.tenure-direct .unit-label {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+}
+
 /* ── 푸터 ── */
 footer {
   background: #1e293b;
@@ -684,22 +757,55 @@ footer strong { color: rgba(255,255,255,0.7); }
             </div>
           </div>
 
-          <!-- 입사일 -->
-          <div class="form-group">
-            <label>입사일 <span class="required">*</span></label>
-            <input type="date" id="startDate" onchange="calcYears()">
-          </div>
-
-          <!-- 퇴직(예정)일 -->
-          <div class="form-group">
-            <label>퇴직(예정)일 <span class="required">*</span></label>
-            <input type="date" id="endDate" onchange="calcYears()">
-          </div>
-
-          <!-- 근속연수 표시 -->
+          <!-- 근무기간 입력 (모드 전환) -->
           <div class="form-group full">
-            <label>근속연수 <span class="hint">(자동 계산)</span></label>
-            <div class="years-display" id="years-display">입사일과 퇴직일을 입력하세요</div>
+            <label>근무 기간 <span class="required">*</span></label>
+
+            <!-- 모드 탭 -->
+            <div class="input-mode-tabs">
+              <button class="input-mode-tab active" id="tab-dropdown" onclick="switchMode('dropdown')">
+                📅 입사·퇴사 년월
+              </button>
+              <button class="input-mode-tab" id="tab-direct" onclick="switchMode('direct')">
+                ✏️ 근속연수 직접 입력
+              </button>
+            </div>
+
+            <!-- 모드 A: 년/월 드롭다운 -->
+            <div id="mode-dropdown">
+              <div class="date-dropdowns">
+                <div class="date-drop-group">
+                  <label style="font-size:12px; color: var(--muted); font-weight:600;">입사 년월</label>
+                  <div class="date-drop-row">
+                    <select id="startYear" onchange="calcYears()"></select>
+                    <select id="startMonth" onchange="calcYears()"></select>
+                  </div>
+                </div>
+                <div class="date-drop-group">
+                  <label style="font-size:12px; color: var(--muted); font-weight:600;">퇴직(예정) 년월</label>
+                  <div class="date-drop-row">
+                    <select id="endYear" onchange="calcYears()"></select>
+                    <select id="endMonth" onchange="calcYears()"></select>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 모드 B: 근속연수 직접 입력 -->
+            <div id="mode-direct" style="display:none;">
+              <div class="tenure-direct">
+                <input type="number" id="directYears" min="0" max="50" placeholder="0" oninput="calcYearsDirect()">
+                <span class="unit-label">년</span>
+                <input type="number" id="directMonths" min="0" max="11" placeholder="0" oninput="calcYearsDirect()">
+                <span class="unit-label">개월</span>
+              </div>
+              <p style="font-size:12px; color: var(--muted); margin-top: 8px;">
+                예: 7년 3개월 → 근속연수 8년으로 계산 (1년 미만 올림)
+              </p>
+            </div>
+
+            <!-- 근속연수 결과 표시 -->
+            <div class="years-display" id="years-display" style="margin-top: 10px;">입사·퇴직 년월을 선택하세요</div>
           </div>
 
           <!-- 수령 방식 -->
@@ -1113,31 +1219,103 @@ function showToast(msg) {
 }
 
 // ═══════════════════════════════════════════
-//  근속연수 계산
+//  입력 모드 전환 + 근속연수 계산
 // ═══════════════════════════════════════════
 let workedYears = 0;
+let inputMode = 'dropdown'; // 'dropdown' | 'direct'
 
+// ── 드롭다운 옵션 생성 ──
+function buildDropdowns() {
+  const now = new Date();
+  const curYear = now.getFullYear();
+  const curMonth = now.getMonth() + 1;
+
+  ['startYear', 'endYear'].forEach(id => {
+    const sel = document.getElementById(id);
+    sel.innerHTML = '';
+    for (let y = curYear; y >= 1970; y--) {
+      const opt = document.createElement('option');
+      opt.value = y;
+      opt.textContent = y + '년';
+      sel.appendChild(opt);
+    }
+  });
+
+  ['startMonth', 'endMonth'].forEach(id => {
+    const sel = document.getElementById(id);
+    sel.innerHTML = '';
+    for (let m = 1; m <= 12; m++) {
+      const opt = document.createElement('option');
+      opt.value = m;
+      opt.textContent = m + '월';
+      sel.appendChild(opt);
+    }
+  });
+
+  // 퇴사 기본값: 오늘
+  document.getElementById('endYear').value  = curYear;
+  document.getElementById('endMonth').value = curMonth;
+  // 입사 기본값: 5년 전
+  document.getElementById('startYear').value  = curYear - 5;
+  document.getElementById('startMonth').value = curMonth;
+}
+
+// ── 모드 전환 ──
+function switchMode(mode) {
+  inputMode = mode;
+  document.getElementById('tab-dropdown').classList.toggle('active', mode === 'dropdown');
+  document.getElementById('tab-direct').classList.toggle('active', mode === 'direct');
+  document.getElementById('mode-dropdown').style.display = mode === 'dropdown' ? '' : 'none';
+  document.getElementById('mode-direct').style.display   = mode === 'direct'   ? '' : 'none';
+  workedYears = 0;
+  document.getElementById('years-display').textContent =
+    mode === 'dropdown' ? '입사·퇴직 년월을 선택하세요' : '근속연수를 입력하세요';
+  if (mode === 'dropdown') calcYears();
+  else calcYearsDirect();
+}
+
+// ── 드롭다운 모드 계산 ──
 function calcYears() {
-  const s = document.getElementById('startDate').value;
-  const e = document.getElementById('endDate').value;
   const display = document.getElementById('years-display');
+  const sy = +document.getElementById('startYear').value;
+  const sm = +document.getElementById('startMonth').value;
+  const ey = +document.getElementById('endYear').value;
+  const em = +document.getElementById('endMonth').value;
 
-  if (!s || !e) { display.textContent = '입사일과 퇴직일을 입력하세요'; workedYears = 0; return; }
+  if (!sy || !sm || !ey || !em) { workedYears = 0; return; }
 
-  const start = new Date(s);
-  const end   = new Date(e);
-
-  if (end <= start) {
-    display.textContent = '⚠ 퇴직일이 입사일보다 빠릅니다';
+  const totalMonths = (ey - sy) * 12 + (em - sm);
+  if (totalMonths <= 0) {
+    display.textContent = '⚠ 퇴직 년월이 입사 년월보다 빠릅니다';
     workedYears = 0; return;
   }
 
-  const diffMs    = end - start;
-  const diffDays  = Math.floor(diffMs / (1000 * 60 * 60 * 24));
-  const years     = diffDays / 365.25;
-  workedYears     = Math.ceil(years);                 // 1년 미만 올림
-  const fullYears = Math.floor(years);
-  const remMonths = Math.round((years - fullYears) * 12);
+  const fullYears = Math.floor(totalMonths / 12);
+  const remMonths = totalMonths % 12;
+  workedYears = remMonths > 0 ? fullYears + 1 : fullYears; // 1년 미만 올림
+
+  let str = '';
+  if (fullYears > 0) str += `${fullYears}년 `;
+  if (remMonths > 0) str += `${remMonths}개월 `;
+  str += `→ 근속연수 적용: ${workedYears}년`;
+  display.textContent = str;
+}
+
+// ── 직접 입력 모드 계산 ──
+function calcYearsDirect() {
+  const display = document.getElementById('years-display');
+  const y = parseInt(document.getElementById('directYears').value) || 0;
+  const m = parseInt(document.getElementById('directMonths').value) || 0;
+
+  if (y === 0 && m === 0) {
+    display.textContent = '근속연수를 입력하세요';
+    workedYears = 0; return;
+  }
+
+  const totalMonths = y * 12 + m;
+  const fullYears = Math.floor(totalMonths / 12);
+  const remMonths = totalMonths % 12;
+  workedYears = remMonths > 0 ? fullYears + 1 : fullYears;
 
   let str = '';
   if (fullYears > 0) str += `${fullYears}년 `;
@@ -1393,13 +1571,13 @@ function toggleAccordion() {
 }
 
 function resetForm() {
-  document.getElementById('pension').value   = '';
-  document.getElementById('startDate').value = '';
-  document.getElementById('endDate').value   = '';
-  document.getElementById('years-display').textContent = '입사일과 퇴직일을 입력하세요';
+  document.getElementById('pension').value = '';
   document.getElementById('result-section').style.display = 'none';
   workedYears = 0;
   selectMethod('lump');
+  switchMode('dropdown');
+  buildDropdowns();
+  calcYears();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -1420,10 +1598,9 @@ function copyResult() {
     .catch(() => showToast('복사에 실패했습니다'));
 }
 
-// 오늘 날짜 기본값 설정 + 근속연수 자동 반영
+// 초기화
 (function() {
-  const today = new Date().toISOString().split('T')[0];
-  document.getElementById('endDate').value = today;
+  buildDropdowns();
   calcYears();
 })();
 </script>
