@@ -1,6 +1,10 @@
-const CACHE = 'dccalc-v1';
+const CACHE = 'dccalc-v2';
 const PRECACHE = [
   '/',
+  '/yangsedo.html',
+  '/silsuryeong.html',
+  '/geonbo.html',
+  '/jeungyese.html',
   '/guide.html',
   '/about.html',
   '/contact.html',

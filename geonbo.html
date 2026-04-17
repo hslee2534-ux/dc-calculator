@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>건강보험료 계산기 | 직장·지역가입자 보험료 자동계산 2026</title>
+<meta name="description" content="직장가입자·지역가입자 건강보험료를 즉시 계산하세요. 퇴직 후 건강보험료, 장기요양보험료 자동 반영. 2026년 보험요율 기준.">
+<meta name="keywords" content="건강보험료 계산기, 지역가입자 건강보험료, 퇴직 후 건강보험, 직장가입자 보험료, 장기요양보험료">
+<meta property="og:title" content="건강보험료 계산기 — 직장·지역가입자 보험료 즉시 계산">
+<meta property="og:description" content="직장가입자 월 보수 또는 지역가입자 소득을 입력하면 건강보험료를 즉시 계산. 2026년 기준.">
+<meta property="og:image" content="https://dc-calc.com/og-image.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dc-calc.com/geonbo.html">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://dc-calc.com/geonbo.html">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#0f2557">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"건강보험료 계산기","url":"https://dc-calc.com/geonbo.html","description":"직장가입자·지역가입자 건강보험료 자동 계산. 장기요양보험료 포함. 2026년 기준.","applicationCategory":"FinanceApplication","operatingSystem":"All","offers":{"@type":"Offer","price":"0","priceCurrency":"KRW"}}
+</script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-93GZ0DDW9B"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-93GZ0DDW9B');
+</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1721658033156631" crossorigin="anonymous"></script>
+<style>
+:root {
+  --primary: #1a3a6b;
+  --primary-dark: #0f2557;
+  --accent: #2563eb;
+  --accent-light: #dbeafe;
+  --success: #059669;
+  --success-light: #d1fae5;
+  --warning: #d97706;
+  --warning-light: #fef3c7;
+  --danger: #dc2626;
+  --teal: #0891b2;
+  --teal-light: #cffafe;
+  --border: #e2e8f0;
+  --bg: #f8fafc;
+  --text: #1e293b;
+  --muted: #64748b;
+  --white: #ffffff;
+  --radius: 10px;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', -apple-system, sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.6; }
+
+.ad-zone { background: #fafafa; border: 1px dashed #cbd5e1; border-radius: 6px; display: flex; align-items: center; justify-content: center; color: #94a3b8; font-size: 12px; text-align: center; }
+.ad-top { width: 100%; height: 90px; }
+.ad-side { width: 100%; min-height: 250px; }
+.ad-mid { width: 100%; height: 90px; margin: 24px 0; }
+
+header { background: var(--primary-dark); color: white; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.3); }
+.header-inner { max-width: 1100px; margin: 0 auto; padding: 12px 20px; display: flex; align-items: center; justify-content: space-between; }
+.logo { font-size: 18px; font-weight: 700; color: white; text-decoration: none; }
+.logo span { color: #93c5fd; }
+.header-nav { display: flex; gap: 4px; }
+.header-nav a { color: rgba(255,255,255,0.7); text-decoration: none; padding: 6px 12px; border-radius: 6px; font-size: 13px; transition: all 0.2s; }
+.header-nav a:hover, .header-nav a.active { background: rgba(255,255,255,0.15); color: white; }
+.hamburger { display: none; background: none; border: none; cursor: pointer; padding: 6px 8px; color: white; font-size: 22px; line-height: 1; }
+.mobile-menu { display: none; background: var(--primary); padding: 8px 12px; }
+.mobile-menu.open { display: block; }
+.mobile-menu a { display: block; color: rgba(255,255,255,0.85); text-decoration: none; padding: 10px 12px; border-radius: 6px; font-size: 14px; }
+.mobile-menu a:hover { background: rgba(255,255,255,0.1); }
+
+.hero { background: linear-gradient(135deg, #0a1a3a 0%, #0c4a6e 50%, #0e7490 100%); color: white; padding: 32px 20px 28px; text-align: center; }
+.hero h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+.hero h1 span { color: #67e8f9; }
+.hero p { font-size: 14px; opacity: 0.85; }
+.hero-badges { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }
+.badge { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: white; }
+
+.layout { max-width: 1100px; margin: 0 auto; padding: 24px 16px; display: grid; grid-template-columns: 1fr 300px; gap: 20px; align-items: start; }
+.main-col { display: flex; flex-direction: column; gap: 16px; }
+.side-col { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 64px; }
+
+.card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+.card-header { padding: 16px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
+.card-header h2 { font-size: 16px; font-weight: 700; color: var(--primary); }
+.card-header .icon { width: 32px; height: 32px; background: var(--teal-light); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.card-body { padding: 20px; }
+
+/* 모드 탭 */
+.mode-tabs { display: flex; gap: 6px; background: var(--bg); border: 1.5px solid var(--border); border-radius: 10px; padding: 4px; margin-bottom: 20px; }
+.mode-tab { flex: 1; padding: 10px; border-radius: 7px; border: none; background: transparent; font-size: 14px; font-weight: 600; color: var(--muted); cursor: pointer; font-family: inherit; transition: all 0.18s; text-align: center; }
+.mode-tab.active { background: white; color: var(--teal); box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.form-group { display: flex; flex-direction: column; gap: 6px; }
+.form-group.full { grid-column: 1 / -1; }
+label { font-size: 13px; font-weight: 600; color: var(--text); display: flex; align-items: center; gap: 4px; }
+label .required { color: var(--danger); }
+label .hint { font-size: 11px; font-weight: 400; color: var(--muted); margin-left: 4px; }
+input[type="number"], select { width: 100%; padding: 10px 14px; border: 1.5px solid var(--border); border-radius: 8px; font-size: 15px; font-family: inherit; color: var(--text); background: white; transition: border-color 0.2s; -webkit-appearance: none; }
+input[type="number"]:focus, select:focus { outline: none; border-color: var(--teal); box-shadow: 0 0 0 3px rgba(8,145,178,0.1); }
+input[type="number"] { -moz-appearance: textfield; }
+input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+.input-unit { position: relative; }
+.input-unit input { padding-right: 46px; }
+.input-unit .unit { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); font-size: 13px; color: var(--muted); pointer-events: none; }
+
+.info-box { background: #ecfeff; border-left: 4px solid var(--teal); padding: 12px 16px; border-radius: 0 8px 8px 0; font-size: 13px; color: #164e63; margin: 12px 0; }
+
+.btn-calc { width: 100%; padding: 14px; background: linear-gradient(135deg, var(--teal), #0e7490); color: white; border: none; border-radius: 10px; font-size: 16px; font-weight: 700; cursor: pointer; font-family: inherit; transition: all 0.2s; box-shadow: 0 4px 12px rgba(8,145,178,0.3); display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 8px; }
+.btn-calc:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(8,145,178,0.4); }
+.btn-reset { width: 100%; padding: 10px; background: white; color: var(--muted); border: 1.5px solid var(--border); border-radius: 10px; font-size: 14px; cursor: pointer; font-family: inherit; transition: all 0.2s; margin-top: 8px; }
+.btn-reset:hover { border-color: var(--muted); color: var(--text); }
+
+#result-section { display: none; }
+.result-hero { background: linear-gradient(135deg, #0c4a6e, #0e7490); color: white; border-radius: var(--radius); padding: 24px 20px; text-align: center; margin-bottom: 16px; }
+.result-hero .label { font-size: 13px; opacity: 0.8; margin-bottom: 4px; }
+.result-hero .amount { font-size: 40px; font-weight: 700; letter-spacing: -1px; color: #67e8f9; }
+.result-hero .sub { font-size: 13px; opacity: 0.75; margin-top: 6px; }
+.result-hero .tax-summary { display: flex; justify-content: center; gap: 24px; margin-top: 16px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.2); flex-wrap: wrap; }
+.result-hero .tax-item .t-label { font-size: 11px; opacity: 0.7; margin-bottom: 2px; text-align: center; }
+.result-hero .tax-item .t-val { font-size: 15px; font-weight: 700; text-align: center; }
+
+.breakdown-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.breakdown-table th { padding: 8px 12px; background: var(--bg); font-size: 12px; font-weight: 600; color: var(--muted); text-align: left; border-bottom: 1px solid var(--border); }
+.breakdown-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+.breakdown-table tr:last-child td { border-bottom: none; }
+.breakdown-table .row-label { color: var(--text); font-weight: 600; }
+.breakdown-table .row-desc { font-size: 12px; color: var(--muted); }
+.breakdown-table .row-amount { text-align: right; font-weight: 700; color: var(--danger); }
+.breakdown-table .row-amount.income { color: var(--teal); }
+.breakdown-table tr.total-row td { background: var(--bg); font-weight: 700; }
+.breakdown-table tr.total-row .row-amount { font-size: 15px; color: var(--primary); }
+
+.share-btns { display: flex; gap: 8px; margin-top: 12px; }
+.btn-share { flex: 1; padding: 10px; border: none; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; font-family: inherit; transition: all 0.2s; }
+.btn-share.copy { background: var(--bg); border: 1.5px solid var(--border); color: var(--text); }
+.btn-share.copy:hover { border-color: var(--accent); color: var(--accent); }
+
+.info-card { background: white; border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px; }
+.info-card h3 { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+.info-list { list-style: none; }
+.info-list li { font-size: 12px; color: var(--text); padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.info-list li:last-child { border-bottom: none; }
+.info-list .il-val { font-weight: 700; color: var(--teal); }
+
+.calc-nav { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.calc-nav-item { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border: 1.5px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); font-size: 13px; font-weight: 600; transition: all 0.2s; background: white; }
+.calc-nav-item:hover { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+.calc-nav-item.active { border-color: var(--teal); background: var(--teal-light); color: #164e63; pointer-events: none; }
+.calc-nav-item .nav-icon { font-size: 20px; }
+.calc-nav-item .nav-sub { font-size: 11px; font-weight: 400; opacity: 0.7; }
+
+.info-section { background: white; border-top: 1px solid var(--border); padding: 40px 20px; }
+.info-section .inner { max-width: 1100px; margin: 0 auto; }
+.info-section h2 { font-size: 18px; font-weight: 700; color: var(--primary); margin-bottom: 16px; }
+.info-section h3 { font-size: 15px; font-weight: 700; color: var(--text); margin: 20px 0 8px; }
+.info-section p { font-size: 14px; color: var(--muted); line-height: 1.8; margin-bottom: 12px; }
+.info-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 20px 0; }
+.info-card-sm { background: var(--bg); border-radius: 10px; padding: 16px; border: 1px solid var(--border); }
+.info-card-sm h4 { font-size: 13px; font-weight: 700; color: var(--primary); margin-bottom: 6px; }
+.info-card-sm p { font-size: 13px; color: var(--muted); margin: 0; }
+
+footer { background: var(--primary-dark); color: rgba(255,255,255,0.6); padding: 24px 20px; font-size: 12px; }
+.footer-inner { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
+.footer-inner a { color: rgba(255,255,255,0.5); text-decoration: none; }
+.footer-inner a:hover { color: white; }
+
+@media (max-width: 768px) {
+  .layout { grid-template-columns: 1fr; }
+  .side-col { position: static; }
+  .form-grid { grid-template-columns: 1fr; }
+  .info-grid { grid-template-columns: 1fr; }
+  .calc-nav { grid-template-columns: 1fr 1fr; }
+  .header-nav { display: none; }
+  .hamburger { display: block; }
+}
+@media (max-width: 420px) { .calc-nav { grid-template-columns: 1fr; } }
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0f172a; --white: #1e293b; --text: #e2e8f0; --muted: #94a3b8; --border: #334155; }
+  body { background: var(--bg); }
+  input[type="number"], select { background: #1e293b; color: var(--text); border-color: var(--border); }
+  .card, .info-card, .btn-reset, .calc-nav-item { background: var(--white); }
+  .mode-tab.active { background: #334155; }
+}
+@media print {
+  header, .hero, .ad-zone, .side-col, .info-section, .share-btns, .btn-calc, .btn-reset, footer, .calc-nav { display: none !important; }
+  body { background: white; font-size: 12px; }
+  .layout { display: block; padding: 0; }
+  #result-section { display: block !important; }
+}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">DC<span>-calc</span>.com</a>
+    <nav class="header-nav">
+      <a href="/">DC 해지환급액</a>
+      <a href="/yangsedo.html">양도소득세</a>
+      <a href="/silsuryeong.html">연봉 실수령액</a>
+      <a href="/geonbo.html" class="active">건강보험료</a>
+      <a href="/jeungyese.html">증여세</a>
+      <a href="/guide.html">가이드</a>
+    </nav>
+    <button class="hamburger" onclick="toggleMenu()" aria-label="메뉴 열기">☰</button>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="/">💼 DC 해지환급액</a>
+    <a href="/yangsedo.html">🏠 양도소득세</a>
+    <a href="/silsuryeong.html">💰 연봉 실수령액</a>
+    <a href="/geonbo.html">🏥 건강보험료</a>
+    <a href="/jeungyese.html">🎁 증여세</a>
+    <a href="/guide.html">📖 가이드</a>
+  </div>
+</header>
+
+<div class="hero">
+  <h1>건강보험료 <span>계산기</span></h1>
+  <p>직장가입자 · 지역가입자 건강보험료 + 장기요양보험료 즉시 계산</p>
+  <div class="hero-badges">
+    <span class="badge">✅ 2026년 기준</span>
+    <span class="badge">🏥 직장·지역 구분 계산</span>
+    <span class="badge">👴 장기요양보험 포함</span>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="main-col">
+    <div class="ad-zone ad-top">
+      <ins class="adsbygoogle" style="display:block;width:100%;height:90px;" data-ad-client="ca-pub-1721658033156631" data-ad-slot="auto" data-ad-format="horizontal"></ins>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="icon">🏥</div>
+        <h2>보험료 계산</h2>
+      </div>
+      <div class="card-body">
+        <!-- 모드 탭 -->
+        <div class="mode-tabs">
+          <button class="mode-tab active" id="tab-jikjang" onclick="gb_switchMode('jikjang')" aria-pressed="true">💼 직장가입자</button>
+          <button class="mode-tab" id="tab-jiyeok" onclick="gb_switchMode('jiyeok')" aria-pressed="false">🏘 지역가입자</button>
+        </div>
+
+        <!-- 직장가입자 입력 -->
+        <div id="form-jikjang">
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>월 보수월액 <span class="required">*</span><span class="hint">(비과세 제외한 월 급여)</span></label>
+              <div class="input-unit">
+                <input type="number" id="jj-monthly" placeholder="3000000" min="0" step="10000" aria-label="월 보수월액 입력">
+                <span class="unit">원</span>
+              </div>
+            </div>
+          </div>
+          <div class="info-box">💡 <strong>보수월액</strong>은 식대·교통비 등 비과세 항목을 제외한 과세 급여입니다. 급여명세서의 '과세 급여' 항목을 입력하세요.</div>
+        </div>
+
+        <!-- 지역가입자 입력 -->
+        <div id="form-jiyeok" style="display:none;">
+          <div class="form-grid">
+            <div class="form-group full">
+              <label>연간 소득 합계 <span class="required">*</span><span class="hint">(사업·근로·금융·임대 등)</span></label>
+              <div class="input-unit">
+                <input type="number" id="jy-annual-income" placeholder="30000000" min="0" step="100000" aria-label="연간 소득 합계">
+                <span class="unit">원</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>재산세 과세표준 <span class="hint">(주택·토지·건물)</span></label>
+              <div class="input-unit">
+                <input type="number" id="jy-property" placeholder="100000000" min="0" step="1000000" aria-label="재산세 과세표준">
+                <span class="unit">원</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label>자동차 보험료 점수 <span class="hint">(없으면 0)</span></label>
+              <div class="input-unit">
+                <input type="number" id="jy-car" placeholder="0" min="0" step="1" aria-label="자동차 보험료 점수">
+                <span class="unit">점</span>
+              </div>
+            </div>
+          </div>
+          <div class="info-box">💡 재산 보험료 기준: 재산세 과세표준에서 기본공제 <strong>5,000만원</strong> 차감 후 산정. 자동차 점수는 <strong>1점 = 208.4원</strong> 기준. 재산·자동차 점수는 국민건강보험 홈페이지에서 정확히 확인하세요.</div>
+        </div>
+
+        <button class="btn-calc" onclick="gb_calculate()" aria-label="보험료 계산">
+          🏥 건강보험료 계산하기
+        </button>
+        <button class="btn-reset" onclick="gb_reset()">초기화</button>
+      </div>
+    </div>
+
+    <!-- 결과 -->
+    <div class="card" id="result-section">
+      <div class="card-header">
+        <div class="icon">📊</div>
+        <h2>계산 결과</h2>
+      </div>
+      <div class="card-body">
+        <div class="result-hero">
+          <div class="label">월 건강보험료 합계 (본인 부담)</div>
+          <div class="amount" id="res-total">—</div>
+          <div class="sub" id="res-annual">연 납부 예상: —</div>
+          <div class="tax-summary">
+            <div class="tax-item">
+              <div class="t-label">건강보험료</div>
+              <div class="t-val" id="res-health">—</div>
+            </div>
+            <div class="tax-item">
+              <div class="t-label">장기요양보험료</div>
+              <div class="t-val" id="res-ltcare">—</div>
+            </div>
+            <div class="tax-item" id="company-wrap">
+              <div class="t-label">회사 부담분</div>
+              <div class="t-val" id="res-company">—</div>
+            </div>
+          </div>
+        </div>
+
+        <table class="breakdown-table">
+          <thead>
+            <tr><th>항목</th><th>산정 기준</th><th style="text-align:right">금액</th></tr>
+          </thead>
+          <tbody id="breakdown-tbody">
+          </tbody>
+        </table>
+
+        <div class="share-btns">
+          <button class="btn-share copy" onclick="gb_copyResult()">📋 결과 복사</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="ad-zone ad-mid">
+      <ins class="adsbygoogle" style="display:block;width:100%;height:90px;" data-ad-client="ca-pub-1721658033156631" data-ad-slot="auto" data-ad-format="horizontal"></ins>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="icon">🔗</div>
+        <h2>다른 계산기 바로가기</h2>
+      </div>
+      <div class="card-body">
+        <div class="calc-nav">
+          <a href="/" class="calc-nav-item">
+            <span class="nav-icon">💼</span>
+            <div class="nav-text"><div>DC 해지환급액</div><div class="nav-sub">확정기여형</div></div>
+          </a>
+          <a href="/yangsedo.html" class="calc-nav-item">
+            <span class="nav-icon">🏠</span>
+            <div class="nav-text"><div>양도소득세</div><div class="nav-sub">부동산 양도세</div></div>
+          </a>
+          <a href="/silsuryeong.html" class="calc-nav-item">
+            <span class="nav-icon">💰</span>
+            <div class="nav-text"><div>연봉 실수령액</div><div class="nav-sub">세후 월급 계산</div></div>
+          </a>
+          <a href="/jeungyese.html" class="calc-nav-item">
+            <span class="nav-icon">🎁</span>
+            <div class="nav-text"><div>증여세</div><div class="nav-sub">가족 증여 절세</div></div>
+          </a>
+          <a href="/geonbo.html" class="calc-nav-item active">
+            <span class="nav-icon">🏥</span>
+            <div class="nav-text"><div>건강보험료</div><div class="nav-sub">직장·지역가입자</div></div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="side-col">
+    <div class="ad-zone ad-side">
+      <ins class="adsbygoogle" style="display:block;width:100%;min-height:250px;" data-ad-client="ca-pub-1721658033156631" data-ad-slot="auto" data-ad-format="rectangle"></ins>
+    </div>
+
+    <div class="info-card">
+      <h3>📌 2026년 건강보험요율</h3>
+      <ul class="info-list">
+        <li><span>건강보험 (합계)</span><span class="il-val">7.09%</span></li>
+        <li><span>— 근로자 부담</span><span class="il-val">3.545%</span></li>
+        <li><span>— 사용자 부담</span><span class="il-val">3.545%</span></li>
+        <li><span>장기요양보험</span><span class="il-val">건보 × 12.95%</span></li>
+        <li><span>점수당 금액 (지역)</span><span class="il-val">208.4원</span></li>
+      </ul>
+    </div>
+
+    <div class="info-card">
+      <h3>💡 퇴직 후 건강보험</h3>
+      <ul class="info-list">
+        <li><span>임의계속가입</span><span class="il-val">최대 36개월</span></li>
+        <li><span>지역가입자 전환</span><span class="il-val">퇴직 다음 달</span></li>
+        <li><span>피부양자 등록</span><span class="il-val">소득 요건 충족 시</span></li>
+      </ul>
+    </div>
+
+    <div class="ad-zone ad-side">
+      <ins class="adsbygoogle" style="display:block;width:100%;min-height:250px;" data-ad-client="ca-pub-1721658033156631" data-ad-slot="auto" data-ad-format="rectangle"></ins>
+    </div>
+  </div>
+</div>
+
+<section class="info-section">
+  <div class="inner">
+    <h2>건강보험료 계산 방법</h2>
+    <p>건강보험료는 가입 유형에 따라 직장가입자와 지역가입자로 나뉘어 다르게 산정됩니다.</p>
+
+    <div class="info-grid">
+      <div class="info-card-sm">
+        <h4>💼 직장가입자</h4>
+        <p>월 보수월액 × 7.09% (근로자·사업주 각 3.545%). 장기요양보험료는 건강보험료의 12.95% 추가.</p>
+      </div>
+      <div class="info-card-sm">
+        <h4>🏘 지역가입자</h4>
+        <p>소득·재산·자동차 점수 합계 × 208.4원. 기본공제 5,000만원 적용 후 재산 점수 산정.</p>
+      </div>
+    </div>
+
+    <h3>퇴직 후 건강보험료 대책</h3>
+    <p><strong>임의계속가입</strong>: 퇴직 후 2개월 이내 신청 시 최대 36개월간 직장가입자 보험료 유지. 퇴직 전 급여가 높지 않았다면 지역가입자 전환보다 유리할 수 있습니다.</p>
+    <p><strong>피부양자 등록</strong>: 배우자·자녀 등 직장가입자의 피부양자로 등록 가능. 연소득 2,000만원 이하, 재산 5.4억원 이하(일부 예외) 요건 충족 필요.</p>
+    <p><strong>지역가입자 전환</strong>: 소득이 없거나 낮다면 지역가입자 보험료가 더 저렴할 수 있습니다. 단, 재산이 많을 경우 불리할 수 있어 비교 확인이 필요합니다.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <span>© 2026 DC-Calc.com · 세금 계산 참고용, 법적 효력 없음</span>
+    <div style="display:flex;gap:16px;">
+      <a href="/privacy.html">개인정보처리방침</a>
+      <a href="/about.html">소개</a>
+      <a href="/contact.html">문의</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function toggleMenu() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+
+let gb_mode = 'jikjang';
+
+function gb_switchMode(mode) {
+  gb_mode = mode;
+  document.getElementById('form-jikjang').style.display = mode === 'jikjang' ? 'block' : 'none';
+  document.getElementById('form-jiyeok').style.display = mode === 'jiyeok' ? 'block' : 'none';
+  document.getElementById('tab-jikjang').classList.toggle('active', mode === 'jikjang');
+  document.getElementById('tab-jiyeok').classList.toggle('active', mode === 'jiyeok');
+  document.getElementById('tab-jikjang').setAttribute('aria-pressed', mode === 'jikjang');
+  document.getElementById('tab-jiyeok').setAttribute('aria-pressed', mode === 'jiyeok');
+  document.getElementById('result-section').style.display = 'none';
+}
+
+function gb_fmt(n) {
+  return Math.round(n).toLocaleString('ko-KR') + '원';
+}
+
+function gb_calculate() {
+  if (gb_mode === 'jikjang') {
+    gb_calcJikjang();
+  } else {
+    gb_calcJiyeok();
+  }
+}
+
+function gb_calcJikjang() {
+  const monthly = parseFloat(document.getElementById('jj-monthly').value) || 0;
+  if (monthly <= 0) { alert('월 보수월액을 입력해 주세요.'); return; }
+
+  const HEALTH_RATE = 0.03545;
+  const LTCARE_RATE = 0.1295;
+
+  const healthEmployee = monthly * HEALTH_RATE;
+  const healthCompany = monthly * HEALTH_RATE;
+  const healthTotal = monthly * 0.0709;
+
+  const ltcareEmployee = healthEmployee * LTCARE_RATE;
+  const ltcareCompany = healthCompany * LTCARE_RATE;
+  const ltcareTotal = healthTotal * LTCARE_RATE;
+
+  const totalEmployee = healthEmployee + ltcareEmployee;
+  const totalCompany = healthCompany + ltcareCompany;
+  const totalAll = healthTotal + ltcareTotal;
+
+  gb_showResult({
+    mode: 'jikjang',
+    total: totalEmployee,
+    health: healthEmployee,
+    ltcare: ltcareEmployee,
+    company: totalCompany,
+    rows: [
+      { label: '건강보험료 (근로자)', desc: `월보수 ${gb_fmt(monthly)} × 3.545%`, amount: healthEmployee },
+      { label: '건강보험료 (사용자)', desc: `월보수 ${gb_fmt(monthly)} × 3.545%`, amount: healthCompany },
+      { label: '장기요양 (근로자)', desc: `건보 × 12.95%`, amount: ltcareEmployee },
+      { label: '장기요양 (사용자)', desc: `건보 × 12.95%`, amount: ltcareCompany },
+    ],
+    totalAll
+  });
+}
+
+function gb_calcJiyeok() {
+  const annualIncome = parseFloat(document.getElementById('jy-annual-income').value) || 0;
+  const property = parseFloat(document.getElementById('jy-property').value) || 0;
+  const carScore = parseFloat(document.getElementById('jy-car').value) || 0;
+
+  if (annualIncome <= 0 && property <= 0) {
+    alert('연간 소득 또는 재산을 입력해 주세요.');
+    return;
+  }
+
+  const SCORE_PER_WON = 208.4; // 2025년 기준
+  const LTCARE_RATE = 0.1295;
+
+  // 소득 보험료 = 연소득 × 7.09% / 12 (근사치)
+  const incomeHealth = (annualIncome * 0.0709) / 12;
+
+  // 재산 보험료: 과세표준 - 기본공제 5000만원, 점수로 환산
+  // 재산보험료 점수표 근사: (재산-5000만) / 100만 × 6.55점 (간이 계산)
+  const netProperty = Math.max(property - 50000000, 0);
+  const propertyScore = Math.max(netProperty / 1000000 * 0.4, 0); // 근사 점수
+  const propertyHealth = propertyScore * SCORE_PER_WON;
+
+  // 자동차
+  const carHealth = carScore * SCORE_PER_WON;
+
+  const totalHealth = incomeHealth + propertyHealth + carHealth;
+  const ltcare = totalHealth * LTCARE_RATE;
+  const total = totalHealth + ltcare;
+
+  gb_showResult({
+    mode: 'jiyeok',
+    total,
+    health: totalHealth,
+    ltcare,
+    company: 0,
+    rows: [
+      { label: '소득 건강보험료', desc: `연소득 ${gb_fmt(annualIncome)} × 7.09% ÷ 12`, amount: incomeHealth },
+      { label: '재산 건강보험료', desc: property > 0 ? `과세표준 ${gb_fmt(property)} (공제 후 근사값)` : '해당없음', amount: propertyHealth },
+      { label: '자동차 보험료', desc: carScore > 0 ? `${carScore}점 × 208.4원` : '해당없음', amount: carHealth },
+      { label: '장기요양보험료', desc: '건강보험료 × 12.95%', amount: ltcare },
+    ],
+    totalAll: total
+  });
+}
+
+function gb_showResult(data) {
+  document.getElementById('res-total').textContent = gb_fmt(data.total);
+  document.getElementById('res-annual').textContent = '연 납부 예상: ' + gb_fmt(data.total * 12);
+  document.getElementById('res-health').textContent = gb_fmt(data.health);
+  document.getElementById('res-ltcare').textContent = gb_fmt(data.ltcare);
+
+  const companyWrap = document.getElementById('company-wrap');
+  if (data.mode === 'jikjang') {
+    companyWrap.style.display = 'block';
+    document.getElementById('res-company').textContent = gb_fmt(data.company);
+  } else {
+    companyWrap.style.display = 'none';
+  }
+
+  const tbody = document.getElementById('breakdown-tbody');
+  tbody.innerHTML = '';
+  data.rows.forEach(row => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `<td><div class="row-label">${row.label}</div><div class="row-desc">${row.desc}</div></td><td></td><td><div class="row-amount">${gb_fmt(row.amount)}</div></td>`;
+    tbody.appendChild(tr);
+  });
+  const totalTr = document.createElement('tr');
+  totalTr.className = 'total-row';
+  totalTr.innerHTML = `<td colspan="2"><div class="row-label">${data.mode === 'jikjang' ? '근로자 부담 합계' : '월 보험료 합계'}</div></td><td><div class="row-amount">${gb_fmt(data.total)}</div></td>`;
+  tbody.appendChild(totalTr);
+
+  document.getElementById('result-section').style.display = 'block';
+  document.getElementById('result-section').scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+  gtag('event', 'calculate_geonbo', { mode: data.mode });
+}
+
+function gb_reset() {
+  document.getElementById('jj-monthly').value = '';
+  document.getElementById('jy-annual-income').value = '';
+  document.getElementById('jy-property').value = '';
+  document.getElementById('jy-car').value = '';
+  document.getElementById('result-section').style.display = 'none';
+}
+
+function gb_copyResult() {
+  const total = document.getElementById('res-total').textContent;
+  const health = document.getElementById('res-health').textContent;
+  const ltcare = document.getElementById('res-ltcare').textContent;
+  const annual = document.getElementById('res-annual').textContent;
+  const text = `[건강보험료 계산 결과 - dc-calc.com]\n월 합계: ${total}\n건강보험료: ${health}\n장기요양: ${ltcare}\n${annual}`;
+  navigator.clipboard.writeText(text).then(() => alert('결과가 복사되었습니다!'));
+}
+
+(adsbygoogle = window.adsbygoogle || []).push({});
+(adsbygoogle = window.adsbygoogle || []).push({});
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+</body>
+</html>
