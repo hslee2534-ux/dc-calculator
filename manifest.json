@@ -1,0 +1,18 @@
+{
+  "name": "DC 해지환급액 계산기",
+  "short_name": "DC-Calc",
+  "description": "DC(확정기여형) 퇴직연금 해지 시 실수령액 즉시 계산",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f2557",
+  "theme_color": "#0f2557",
+  "lang": "ko",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
