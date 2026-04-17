@@ -2461,10 +2461,15 @@ function ys_buildDropdowns() {
   const cy = now.getFullYear(), cm = now.getMonth() + 1;
   ['ys-buyYear','ys-sellYear'].forEach(id => {
     const sel = document.getElementById(id); sel.innerHTML = '';
-    for (let y = cy; y >= 1970; y--) {
+    const maxY = id === 'ys-sellYear' ? cy + 10 : cy;
+    for (let y = cy + 10; y >= 1970; y--) {
       const o = document.createElement('option');
-      o.value = y; o.textContent = y + '년'; sel.appendChild(o);
+      o.value = y;
+      o.textContent = y + '년' + (y > cy ? ' (예정)' : '');
+      sel.appendChild(o);
     }
+    // 기본값: 취득은 현재, 양도는 현재
+    sel.value = cy;
   });
   ['ys-buyMonth','ys-sellMonth'].forEach(id => {
     const sel = document.getElementById(id); sel.innerHTML = '';

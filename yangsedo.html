@@ -876,11 +876,13 @@ function buildDropdowns() {
   ['buyYear', 'sellYear'].forEach(id => {
     const sel = document.getElementById(id);
     sel.innerHTML = '';
-    for (let y = curYear; y >= 1970; y--) {
+    for (let y = curYear + 10; y >= 1970; y--) {
       const o = document.createElement('option');
-      o.value = y; o.textContent = y + '년';
+      o.value = y;
+      o.textContent = y + '년' + (y > curYear ? ' (예정)' : '');
       sel.appendChild(o);
     }
+    sel.value = curYear;
   });
   ['buyMonth', 'sellMonth'].forEach(id => {
     const sel = document.getElementById(id);
