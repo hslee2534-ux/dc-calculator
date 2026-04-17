@@ -788,12 +788,17 @@ footer strong { color: rgba(255,255,255,0.7); }
   margin-bottom: 14px;
 }
 .calc-tabs {
-  display: inline-flex;
-  gap: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
   background: rgba(0,0,0,0.25);
   border-radius: 14px;
   padding: 6px;
   margin-bottom: -1px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .calc-tab {
   padding: 12px 24px;
@@ -815,8 +820,9 @@ footer strong { color: rgba(255,255,255,0.7); }
 }
 .calc-tab:hover { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); }
 .calc-tab.active { background: white; color: var(--primary); }
-.calc-tab .tab-sub { font-size: 11px; font-weight: 400; opacity: 0.7; }
+.calc-tab .tab-sub { font-size: 11px; font-weight: 400; opacity: 0.7; display: block; }
 .calc-tab.active .tab-sub { opacity: 0.6; }
+a.calc-tab { text-decoration: none; display: flex; flex-direction: column; align-items: center; }
 
 /* ── 양도세 전용 ── */
 .calc-tabs-wrap.ys-active { background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 60%, #4c1d95 100%); }
@@ -988,6 +994,18 @@ footer strong { color: rgba(255,255,255,0.7); }
       🏠 양도소득세
       <span class="tab-sub">부동산 양도세</span>
     </button>
+    <a href="/silsuryeong.html" class="calc-tab">
+      💰 연봉 실수령액
+      <span class="tab-sub">세후 월급 계산</span>
+    </a>
+    <a href="/geonbo.html" class="calc-tab">
+      🏥 건강보험료
+      <span class="tab-sub">직장·지역가입자</span>
+    </a>
+    <a href="/jeungyese.html" class="calc-tab">
+      🎁 증여세
+      <span class="tab-sub">가족 증여 절세</span>
+    </a>
   </div>
   <!-- DC 히어로 콘텐츠 -->
   <div id="hero-content-dc" style="padding: 20px 0 28px; text-align:center; color:white;">
